@@ -18,6 +18,8 @@ common_errors = [
     "can\'t disable ASPM",
     "Failed to load module \"vesa\"",
     "Failed to load module vesa",
+    "Failed to load module \"fbdev\"",
+    "Failed to load module fbdev",
     "Failed to load module \"modesetting\"",
     "Failed to load module modesetting",
     "Failed to load module \"glx\"",
@@ -26,7 +28,9 @@ common_errors = [
     "_OSC failed (AE_NOT_FOUND); disabling ASPM",
     "Open ACPI failed (/var/run/acpid.socket) (No such file or directory)",
     "NX (Execute Disable) protection cannot be enabled: non-PAE kernel!",
-    "hd.: possibly failed opcode"
+    "hd.: possibly failed opcode",
+    'NETLINK INITIALIZATION FAILED',
+    'kernel: Cannot find map file'
     ]
 
 x86_common = [
@@ -63,7 +67,12 @@ ignore_errors = {
         'mmci-pl18x: probe of fpga:0b failed with error -22',
         'Failed to load module "glx"'
         ] + common_errors,
-    'emenlow' : x86_common,
+    'emenlow' : [
+        '[Firmware Bug]: ACPI: No _BQC method, cannot determine initial brightness'
+        ] + x86_common,
+    'core2_32' : [
+        '[Firmware Bug]: ACPI: No _BQC method, cannot determine initial brightness'
+        ] + x86_common,
     'crownbay' : x86_common,
     'genericx86' : x86_common,
     'genericx86-64' : x86_common,
@@ -72,13 +81,11 @@ ignore_errors = {
         ] + common_errors,
     'minnow' : [
         'netlink init failed',
-        'NETLINK INITIALIZATION FAILED',
         ] + common_errors,
     'jasperforest' : [
         'Activated service \'org.bluez\' failed:',
         'Unable to find NFC netlink family',
         'netlink init failed',
-        'NETLINK INITIALIZATION FAILED',
         ] + common_errors,
 }
 
